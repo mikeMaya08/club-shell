@@ -39,3 +39,21 @@ Then open **<http://127.0.0.1:5000>**.
 
 Create a site from this repo (build `npm run build`, publish `dist`). Edit `public/_redirects` if your
 app sites have different names. Each app is a separate Netlify site built from its own repo.
+
+## Cross-app testing quick reference
+
+Open everything through the shell origin (<http://127.0.0.1:5000>) so all apps share one `localStorage`.
+
+| Goal                                | URL                                                                             |
+| ----------------------------------- | ------------------------------------------------------------------------------- |
+| Fresh demo data, logged in as admin | `/admin/?reset=1&seed=demo&as=admin-1&now=2026-10-10T10:00`                     |
+| Player tab                          | `/player/?as=player-1&now=2026-10-10T10:00`                                     |
+| Coach tab                           | `/coach/?as=coach-1&now=2026-10-10T10:00`                                       |
+| Conflict testing (≈90% booked)      | `/player/?reset=1&seed=full&as=player-1`                                        |
+| Loading states / flaky network      | add `&latency=1500` / `&flaky=0.2`                                              |
+| Inject bugs                         | add `&bug=double-booking,stale-ui,wrong-price,cancel-anytime,slow-render`       |
+
+Hook parameters are applied once, saved in `sessionStorage` (per tab) and removed from the address bar.
+Press **Ctrl+Shift+D** in any app for the debug panel (user, clock, bugs, JSON state, reset/seed buttons).
+`window.__club` exposes `{ state, reset(seed), setBugs([]), setNow(iso) }` in every app.
+Use the same `now=` in every tab, otherwise each tab runs on a different clock.
