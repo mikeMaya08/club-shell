@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Baseline Tennis Club</title>
+    <style>
+      :root { color-scheme: light; font-family: system-ui, sans-serif; }
+      body { margin: 0; background: #f0fdf4; color: #14532d; }
+      main { max-width: 640px; margin: 0 auto; padding: 32px 16px; }
+      h1 { margin: 0 0 4px; }
+      p { margin: 0 0 24px; color: #166534; }
+      ul { list-style: none; padding: 0; display: grid; gap: 12px; }
+      a.app { display: block; padding: 16px; border-radius: 12px; background: #fff; border: 1px solid #bbf7d0; color: inherit; text-decoration: none; }
+      a.app:hover { border-color: #16a34a; }
+      a.app strong { display: block; font-size: 18px; }
+      a.app span { color: #4b5563; font-size: 14px; }
+      button { margin-top: 24px; padding: 10px 16px; border: 0; border-radius: 8px; background: #dc2626; color: #fff; font-size: 14px; cursor: pointer; }
+      #reset-message { margin-top: 12px; font-size: 14px; min-height: 20px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 data-testid="shell-title">Baseline Tennis Club</h1>
+      <p>QA sandbox. All apps share one origin and one localStorage.</p>
+      <ul>
+        <li><a class="app" href="/player/" data-testid="link-player"><strong>Player</strong><span>Book courts, join lessons, read coach notes</span></a></li>
+        <li><a class="app" href="/admin/" data-testid="link-admin"><strong>Admin</strong><span>Calendar, reservations, courts, users, settings</span></a></li>
+        <li><a class="app" href="/coach/" data-testid="link-coach"><strong>Coach</strong><span>Schedule, lessons, attendance, student notes</span></a></li>
+      </ul>
+      <button id="reset" type="button" data-testid="reset-all">Reset all data</button>
+      <div id="reset-message" data-testid="reset-message" role="status"></div>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

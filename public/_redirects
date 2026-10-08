@@ -1,0 +1,3 @@
+/player/*  https://club-player.netlify.app/player/:splat  200
+/admin/*   https://club-admin.netlify.app/admin/:splat    200
+/coach/*   https://club-coach.netlify.app/coach/:splat    200

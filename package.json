@@ -1,0 +1,17 @@
+{
+  "name": "club-shell",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:all": "concurrently -k -n store,player,admin,coach,shell \"npm --prefix ../club-store run dev\" \"npm --prefix ../club-player run dev\" \"npm --prefix ../club-admin run dev\" \"npm --prefix ../club-coach run dev\" \"npm run dev\"",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 5000"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2"
+  }
+}
