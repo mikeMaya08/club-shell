@@ -1,0 +1,33 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/player",
+      "destination": "https://club-player.vercel.app/player/"
+    },
+    {
+      "source": "/player/:path*",
+      "destination": "https://club-player.vercel.app/player/:path*"
+    },
+    {
+      "source": "/admin",
+      "destination": "https://club-admin.vercel.app/admin/"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "https://club-admin.vercel.app/admin/:path*"
+    },
+    {
+      "source": "/coach",
+      "destination": "https://club-coach.vercel.app/coach/"
+    },
+    {
+      "source": "/coach/:path*",
+      "destination": "https://club-coach.vercel.app/coach/:path*"
+    }
+  ]
+}

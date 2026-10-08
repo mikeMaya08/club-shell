@@ -5,7 +5,7 @@ Entry point of the **Baseline Tennis Club** sandbox. It gives the three apps (`c
 
 - **Local:** a Vite dev server on `http://localhost:5000` that proxies `/player`, `/admin` and `/coach`
   to the app dev servers (ports 5101, 5102, 5103), websockets included for HMR.
-- **Production:** a Netlify site with a landing page and a `_redirects` file that proxies to the three app sites.
+- **Production:** a Vercel project with a landing page and `rewrites` in `vercel.json` that proxy `/player`, `/admin` and `/coach` to the three app projects.
 
 The landing page links to the apps and has a **Reset all data** button.
 
@@ -16,7 +16,7 @@ The landing page links to the apps and has a **Reset all data** button.
 | `npm install`      | Installs dependencies                                               |
 | `npm run dev`      | Proxy + landing page on :5000 (apps must already be running)        |
 | `npm run dev:all`  | Starts club-store (watch), club-player, club-admin, club-coach and this shell |
-| `npm run build`    | Builds the static landing page into `dist/` (includes `_redirects`) |
+| `npm run build`    | Builds the static landing page into `dist/` |
 
 ### `dev:all`
 
@@ -35,10 +35,25 @@ Then open **<http://127.0.0.1:5000>**.
 > The shell binds `127.0.0.1:5000`, so use that address (and use it consistently: `localStorage` is per origin).
 > Alternatively disable *System Settings → General → AirDrop & Handoff → AirPlay Receiver*.
 
-## Deploy (Netlify)
+## Deploy (Vercel)
 
-Create a site from this repo (build `npm run build`, publish `dist`). Edit `public/_redirects` if your
-app sites have different names. Each app is a separate Netlify site built from its own repo.
+Every repo is its own Vercel project (framework preset *Vite*; each repo's `vercel.json` has the settings):
+
+| Repo          | Suggested project name | Serves                    |
+| ------------- | ---------------------- | ------------------------- |
+| `club-player` | `club-player`          | `/player/*`               |
+| `club-admin`  | `club-admin`           | `/admin/*`                |
+| `club-coach`  | `club-coach`           | `/coach/*`                |
+| `club-shell`  | any (this is the public URL) | landing page + proxy |
+
+`vercel.json` here rewrites `/player/*`, `/admin/*` and `/coach/*` to `https://club-<app>.vercel.app/<app>/*`,
+so the browser only ever sees the shell's origin and all apps share `localStorage`. If your project URLs differ
+(Vercel adds a suffix when a name is taken), edit the destinations in `vercel.json`.
+
+Gotchas:
+- Turn off **Vercel Authentication / Deployment Protection** for the three app projects (or use their public
+  production domains), otherwise the proxy receives a login page instead of the app.
+- Open the app through the shell's domain, never through an app's own `*.vercel.app` URL, or the data will not be shared.
 
 ## Cross-app testing quick reference
 
